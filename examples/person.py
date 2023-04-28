@@ -5,7 +5,7 @@ from pydantic_typer import expand_pydantic_args
 
 @expand_pydantic_args()
 def get_person(person: Person, thing: str = None) -> Person:
-    """mydocstring"""
+    """Mydocstring."""
     from rich import print
 
     print(str(thing))

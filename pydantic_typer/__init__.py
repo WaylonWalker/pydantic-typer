@@ -1,5 +1,5 @@
-from functools import wraps
 import inspect
+from functools import wraps
 from typing import Callable
 
 import typer
@@ -57,7 +57,7 @@ def _make_signature(func, wrapper, typer=False, more_args={}):
             more_args[name] = param
 
     while any(
-        [hasattr(param.annotation, "__fields__") for name, param in more_args.items()]
+        hasattr(param.annotation, "__fields__") for name, param in more_args.items()
     ):
         keys_to_remove = []
         for name, param in more_args.items():
@@ -68,7 +68,6 @@ def _make_signature(func, wrapper, typer=False, more_args={}):
                 if name not in param.annotation.__fields__.keys():
                     keys_to_remove.append(name)
                 more_args = {**more_args, **param.annotation.__fields__}
-                # names[name] = param.annotation.__name__
                 for field in param.annotation.__fields__:
                     names[field] = param.annotation.__name__
 
@@ -78,7 +77,6 @@ def _make_signature(func, wrapper, typer=False, more_args={}):
     wrapper.__doc__ = (
         func.__doc__ or ""
     ) + f"\nalso accepts {more_args.keys()} in place of person model"
-    # fields = Person.__fields__
     raw_args = [
         _make_annotation(
             name,
@@ -99,23 +97,10 @@ def {func.__name__}({aargs}{', ' if aargs else ''}{kwargs}):
     '''{func.__doc__}'''
     return wrapper({call_args})
     """
-    # new_func_sig = f"""{func.__name__}({args}{', ' if args else ''}{kwargs})"""
-    # import typing
 
-    # from makefun import create_function
 
-    # __all__ = ["typing"]
 
-    # new_func = create_function(new_func_sig, func, inject_as_first_arg=True)
 
-    # signature = inspect.Signature()
-    # signature.add("a", inspect.Parameter(default=1))
-    # signature.add("b", inspect.Parameter(default=2))
-    # signature.return_annotation = int
-    # func.signature = signature
-    # signature = inspect.Signature(
-    #     a=Parameter(default=1), b=Parameter(default=2), return_annotation=int
-    # )
     exec(new_func_str, locals(), globals())
     new_func = globals()[func.__name__]
 
@@ -151,8 +136,6 @@ def _expand_kwargs(func, kwargs):
         elif hasattr(param.annotation, "__fields__"):
             updated_kwargs[name] = _expand_param(param, kwargs)
         # its something else so pass it
-        # else:
-        #     updated_kwargs[name] = kwargs[name]
     return updated_kwargs
 
 
