@@ -1,44 +1,13 @@
-# SPDX-FileCopyrightText: 2023-present Waylon S. Walker <waylon@waylonwalker.com>
-##
-# SPDX-License-Identifier: MIT
-
 from functools import wraps
 import inspect
-from typing import Callable, Optional
+from typing import Callable
 
-from pydantic import BaseModel, Field
 import typer
 
 __all__ = ["typer"]
 
 
-class Alpha(BaseModel):
-    a: int
-
-
-class Color(BaseModel):
-    r: int
-    g: int
-    b: int
-    alpha: Alpha
-
-
-class Hair(BaseModel):
-    color: Color
-    length: int
-
-
-class Person(BaseModel):
-    name: str
-    other_name: Optional[str] = None
-    age: int
-    email: Optional[str]
-    pet: str = "dog"
-    address: str = Field("123 Main St", description="Where the person calls home.")
-    hair: Hair
-
-
-def make_annotation(name, field, names, typer=False):
+def _make_annotation(name, field, names, typer=False):
     panel_name = names.get(name)
     next_name = panel_name
     while next_name is not None:
@@ -76,7 +45,7 @@ def make_annotation(name, field, names, typer=False):
     return f"{name}: {annotation}{default}"
 
 
-def make_signature(func, wrapper, typer=False, more_args={}):
+def _make_signature(func, wrapper, typer=False, more_args={}):
     sig = inspect.signature(func)
     names = {}
     for name, param in sig.parameters.items():
@@ -111,7 +80,7 @@ def make_signature(func, wrapper, typer=False, more_args={}):
     ) + f"\nalso accepts {more_args.keys()} in place of person model"
     # fields = Person.__fields__
     raw_args = [
-        make_annotation(
+        _make_annotation(
             name,
             field,
             names=names,
@@ -153,7 +122,7 @@ def {func.__name__}({aargs}{', ' if aargs else ''}{kwargs}):
     sig = inspect.signature(new_func)
     for name, param in sig.parameters.items():
         if hasattr(param.annotation, "__fields__"):
-            return make_signature(new_func, wrapper, typer=typer, more_args=more_args)
+            return _make_signature(new_func, wrapper, typer=typer, more_args=more_args)
     return new_func
 
 
@@ -193,23 +162,6 @@ def expand_pydantic_args(typer: bool = False) -> Callable:
         def wrapper(*args, **kwargs):
             return func(**_expand_kwargs(func, kwargs))
 
-        return make_signature(func, wrapper, typer=typer)
+        return _make_signature(func, wrapper, typer=typer)
 
     return decorator
-
-
-def get_person_vanilla(person: Person) -> Person:
-    from rich import print
-
-    print(person)
-    return person
-
-
-@expand_pydantic_args()
-def get_person(person: Person, thing: str = None) -> Person:
-    """mydocstring"""
-    from rich import print
-
-    print(str(thing))
-
-    print(person)
