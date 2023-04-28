@@ -1,19 +1,13 @@
-# {{ package_title }}
-
-[![PyPI - Version](https://img.shields.io/pypi/v/{{ package_name }}.svg)](https://pypi.org/project/{{ package_name }})
-[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/{{ package_name }}.svg)](https://pypi.org/project/{{ package_name }})
-
----
-
-**Table of Contents**
-
-- [Installation](#installation)
-- [License](#license)
+# pydantic-typer
 
 ## Installation
 
+pypi package to come if this works out, and I can decide
+what to call it. I think its possible to do this for other
+objects like dataclasses as well.
+
 ```console
-pip install {{ package_name }}
+pip install git+https://github.com/WaylonWalker/pydantic-typer.gi
 ```
 
 ## Usage
