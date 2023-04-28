@@ -1,5 +1,7 @@
 # pydantic-typer
 
+https://user-images.githubusercontent.com/22648375/235036031-a9dc6589-e350-4a18-9114-6568cb362f74.mp4
+
 ## Installation
 
 pypi package to come if this works out, and I can decide
