@@ -1,7 +1,11 @@
+"""
+pydantic_typer
+
+"""
 import inspect
-from functools import wraps
 from typing import Callable
 
+from functools import wraps
 import typer
 
 __all__ = ["typer"]
@@ -97,10 +101,6 @@ def {func.__name__}({aargs}{', ' if aargs else ''}{kwargs}):
     '''{func.__doc__}'''
     return wrapper({call_args})
     """
-
-
-
-
     exec(new_func_str, locals(), globals())
     new_func = globals()[func.__name__]
 
