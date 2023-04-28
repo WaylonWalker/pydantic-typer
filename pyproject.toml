@@ -54,6 +54,7 @@ dependencies = [
   "pytest-mock",
   "pytest-rich",
   "ruff",
+  'pyannotate',
   "black",
 ]
 [tool.hatch.envs.default.scripts]
