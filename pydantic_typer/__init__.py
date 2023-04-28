@@ -1,11 +1,8 @@
-"""
-pydantic_typer
-
-"""
+"""pydantic_typer."""
 import inspect
-from typing import Callable
-
 from functools import wraps
+from typing import Any, Callable
+
 import typer
 
 __all__ = ["typer"]
@@ -140,7 +137,7 @@ def _expand_kwargs(func, kwargs):
 
 
 def expand_pydantic_args(typer: bool = False) -> Callable:
-    def decorator(func: Callable) -> Callable[..., any]:
+    def decorator(func: Callable) -> Callable[..., Any]:
         @wraps(func)
         def wrapper(*args, **kwargs):
             return func(**_expand_kwargs(func, kwargs))
