@@ -114,4 +114,4 @@ pydantic-typer get-person
 
 ## License
 
-`{{ package_name }}` is distributed under the terms of the [MIT](https://spdx.org/licenses/MIT.html) license.
+`pydantic-typer` is distributed under the terms of the [MIT](https://spdx.org/licenses/MIT.html) license.
