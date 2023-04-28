@@ -52,7 +52,11 @@ def make_annotation(name, field, names, typer=False):
         else str(field.annotation)
     )
 
-    if field.default is None and not getattr(field, "required", False):
+    if "=" not in repr(field) and not hasattr(field, "required"):
+        default = "=None"
+    elif not hasattr(field, "required"):
+        default = f'="{field.default}"'
+    elif field.default is None and not getattr(field, "required", False):
         if typer:
             default = f' = typer.Option(None, help="{field.field_info.description or ""}", rich_help_panel="{panel_name}")'
         else:
