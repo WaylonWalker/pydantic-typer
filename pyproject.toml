@@ -52,7 +52,6 @@ dependencies = [
   "pytest",
   "pytest-cov",
   "pytest-mock",
-  "pytest-rich",
   "ruff",
   'pyannotate',
   "black",
@@ -90,15 +89,14 @@ exclude_lines = [
 ]
 
 [tool.pytest.ini_options]
-addopts = "-ra -q --rich"
-asyncio_mode = "auto"
+addopts = "-ra -q"
 testpaths = ["tests"]
 
 [tool.coverage_rich]
 fail-under=80
 
 [tool.ruff]
-ignore = ["E501"]
+ignore = ["E501", "D211", "D213"]
 target-version = "py37"
 
 
@@ -112,7 +110,7 @@ select = [
 "D", # pydocstyle
 "UP", # pyupgrade
 "YTT", # flake8-2020
-"ANN", # flake8-annotations
+# "ANN", # flake8-annotations
 "S", # flake8-bandit
 "BLE", # flake8-blind-except
 "FBT", # flake8-boolean-trap
@@ -155,3 +153,9 @@ select = [
 "NPY", # NumPy-specific rules
 "RUF", # Ruff-specific rules
 ]
+[tool.ruff.mccabe]
+# Flag errors (`C901`) whenever the complexity level exceeds 5.
+max-complexity = 13
+
+[tool.ruff.pylint]
+max-branches = 13

@@ -1,3 +1,9 @@
+"""Example usage of expand_pydantic_args with the Person model as a typer cli.
+
+SPDX-FileCopyrightText: 2023-present Waylon S. Walker <waylon@waylonwalker.com>
+
+SPDX-License-Identifier: MIT
+"""
 import typer
 
 from examples.models import Person
@@ -11,6 +17,7 @@ app = typer.Typer(
 
 @app.callback()
 def main() -> None:
+    """Set up typer."""
     return
 
 

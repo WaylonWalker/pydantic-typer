@@ -1,3 +1,9 @@
+"""Example usage of expand_pydantic_args with the Person model.
+
+SPDX-FileCopyrightText: 2023-present Waylon S. Walker <waylon@waylonwalker.com>
+
+SPDX-License-Identifier: MIT
+"""
 from pyannotate_runtime import collect_types
 
 from examples.models import Person
