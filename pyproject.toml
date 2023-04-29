@@ -52,6 +52,7 @@ dependencies = [
   "pytest",
   "pytest-cov",
   "pytest-mock",
+  'polyfactory',
   "ruff",
   'pyannotate',
   "black",
@@ -96,8 +97,9 @@ testpaths = ["tests"]
 fail-under=80
 
 [tool.ruff]
-ignore = ["E501", "D211", "D213"]
+ignore = ["E501", "D211", "D212", "D213"]
 target-version = "py37"
+
 
 
 select = [
@@ -159,3 +161,6 @@ max-complexity = 13
 
 [tool.ruff.pylint]
 max-branches = 13
+
+[tool.ruff.per-file-ignores]
+'tests/**' = ["D100", "D101", "D102", "D103", "D104", "D105", "S101"]

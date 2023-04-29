@@ -11,6 +11,7 @@ Classes:
 
 from typing import Optional
 
+from polyfactory.factories.pydantic_factory import ModelFactory
 from pydantic import BaseModel, Field
 
 
@@ -68,7 +69,7 @@ class Person(BaseModel):
         ...,
         description="The name of the person.",
     )
-    other_name: Optional[str] = Field(
+    alias: Optional[str] = Field(
         None,
         description="An optional other name for the person.",
     )
@@ -92,3 +93,31 @@ class Person(BaseModel):
         ...,
         description="The person's hair.",
     )
+
+
+class AlphaFactory(ModelFactory[Alpha]):
+
+    """A class for generating an alpha value."""
+
+    __model__ = Alpha
+
+
+class ColorFactory(ModelFactory[Color]):
+
+    """A class for generating a color."""
+
+    __model__ = Color
+
+
+class HairFactory(ModelFactory[Hair]):
+
+    """A class for generating hair."""
+
+    __model__ = Hair
+
+
+class PersonFactory(ModelFactory[Person]):
+
+    """A class for generating a person."""
+
+    __model__ = Person
