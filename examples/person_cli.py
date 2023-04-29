@@ -6,8 +6,8 @@ SPDX-License-Identifier: MIT
 """
 import typer
 
-from examples.models import Person
 from pydantic_typer import expand_pydantic_args
+from tests.models import Person
 
 app = typer.Typer(
     name="pydantic_typer",

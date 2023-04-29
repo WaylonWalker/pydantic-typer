@@ -6,8 +6,8 @@ SPDX-License-Identifier: MIT
 """
 from pyannotate_runtime import collect_types
 
-from examples.models import Person
 from pydantic_typer import expand_pydantic_args
+from tests.models import Person
 
 
 @expand_pydantic_args()
