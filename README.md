@@ -1,5 +1,7 @@
 # pydantic-typer
 
+pydantic-typer is a Python package that provides a decorator that can be used to write functions that accept a Pydantic model, but at runtime will allow them to pass in fields to create the models on the fly.
+
 https://user-images.githubusercontent.com/22648375/235036031-a9dc6589-e350-4a18-9114-6568cb362f74.mp4
 
 ## Installation
